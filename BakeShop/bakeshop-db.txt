@@ -1,0 +1,1 @@
+Data Source=GEIPW0785HK;Initial Catalog=BakeShopApp;Integrated Security=False;User Id=sa;Password=Audrey@1986;MultipleActiveResultSets=True;TrustServerCertificate=True;
