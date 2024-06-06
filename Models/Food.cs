@@ -26,7 +26,7 @@ namespace Project2.Models
 
         public override string ToString()
         {
-            return $"{{FoodId: {FoodId},ItemName: {ItemName}, Price: {Price}, FoodQuantity: {FoodQuantity}, InStock: {InStock}}}"; ;
+            return $"{{FoodId: {FoodId},ItemName: {ItemName}, Price: {Price}, FoodQuantity: {FoodQuantity}, InStock: {InStock}}}";
         }
     }
 }

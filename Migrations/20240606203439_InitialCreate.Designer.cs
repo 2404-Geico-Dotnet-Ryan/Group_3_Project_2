@@ -11,7 +11,7 @@ using Project2.Data;
 namespace Project2.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240606180542_InitialCreate")]
+    [Migration("20240606203439_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -32,6 +32,9 @@ namespace Project2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FoodId"));
 
+                    b.Property<int>("FoodQuantity")
+                        .HasColumnType("int");
+
                     b.Property<bool>("InStock")
                         .HasColumnType("bit");
 
@@ -40,9 +43,6 @@ namespace Project2.Migrations
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
 
                     b.HasKey("FoodId");
 
@@ -57,8 +57,8 @@ namespace Project2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PurchaseId"));
 
-                    b.Property<double>("Cost")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Cost")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("FoodId")
                         .HasColumnType("int");
@@ -66,7 +66,7 @@ namespace Project2.Migrations
                     b.Property<long>("PurchaseDate")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int>("PurchaseQuantity")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -90,9 +90,6 @@ namespace Project2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"));
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserType")
                         .HasColumnType("nvarchar(max)");
 
@@ -104,18 +101,23 @@ namespace Project2.Migrations
             modelBuilder.Entity("Project2.Models.User", b =>
                 {
                     b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PurchaseId")
+                    b.Property<int>("RoleId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Users");
                 });
@@ -140,8 +142,8 @@ namespace Project2.Migrations
             modelBuilder.Entity("Project2.Models.User", b =>
                 {
                     b.HasOne("Project2.Models.Role", "Role")
-                        .WithOne("User")
-                        .HasForeignKey("Project2.Models.User", "UserId")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -151,12 +153,6 @@ namespace Project2.Migrations
             modelBuilder.Entity("Project2.Models.Food", b =>
                 {
                     b.Navigation("Purchase")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Project2.Models.Role", b =>
-                {
-                    b.Navigation("User")
                         .IsRequired();
                 });
 

@@ -6,7 +6,7 @@ namespace Project2.Models
     {
         public int PurchaseId { get; set; } //Primary Key
         public int UserId { get; set; } //foreign key, 
-        public int FoodId { get; set; }
+        public int FoodId { get; set; } //foreign?
         public int PurchaseQuantity { get; set; }
         public decimal Cost { get; set; }
         public long PurchaseDate { get; set; }
@@ -28,7 +28,7 @@ namespace Project2.Models
         }
         public override string ToString()
         {
-            return $"{{PurchaseId: {PurchaseId},UserId: {UserId}, FoodId: {FoodId}, PurchaseQuantity: {PurchaseQuantity}, Cost: {Cost}, PurchaseDate: {PurchaseDate}}}"; ;
+            return $"{{PurchaseId: {PurchaseId},UserId: {UserId}, FoodId: {FoodId}, PurchaseQuantity: {PurchaseQuantity}, Cost: {Cost}, PurchaseDate: {PurchaseDate}}}";
         }
 
     }
