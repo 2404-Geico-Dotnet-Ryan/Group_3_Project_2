@@ -31,12 +31,6 @@ namespace Project2.Data
                 .HasMany(p => p.Purchases)
                 .WithOne(u => u.User)
                 .HasForeignKey(u => u.UserId);
-
-            //One-to-One relationship
-            modelBuilder.Entity<Role>()
-                .HasOne(u => u.User)
-                .WithOne(r => r.Role)
-                .HasForeignKey<User>(u => u.UserId);
         }
     }
 }
