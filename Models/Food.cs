@@ -7,35 +7,26 @@ namespace Project2.Models
 
         public int FoodId { get; set; } //Primary Key
         public string? ItemName { get; set; }
-        public double Price { get; set; }
-        public int Quantity { get; set; }
+        public decimal Price { get; set; }
+        public int FoodQuantity { get; set; }
         public bool InStock { get; set; } //available or not
-        public Purchase PurchaseId { get; set; }
 
-        // //Constructors
-        // public Food()
-        // {
-        //     ItemName = "";
-        //     //Customer = new(); //because its an object and works bettr with ToString
-        //     //Don't need this line if we add the ? to the property and below in ToString
-        // }
+        public Purchase Purchase { get; set; }
 
-        // public Food(int id, string itemName, double price, bool inStock, User? user)
-        // {
-        //     Id = id;
-        //     ItemName = itemName;
-        //     Price = price;
-        //     InStock = inStock;
-        // }
+        public Food() { }
 
+        public Food(int foodId, string itemName, decimal price, int foodQuantity, bool inStock)
+        {
+            FoodId = foodId;
+            ItemName = itemName;
+            Price = price;
+            FoodQuantity = foodQuantity;
+            InStock = inStock;
+        }
 
-        // //Methods - Can ToString be moved to UI? Ryans movie example houses in model
-        // public override string ToString()
-        // {
-        //     return "ID: " + Id
-        //     + ", Item Name: " + ItemName
-        //     + ", Price: " + Price
-        //     + ", In Stock: " + InStock;
-        // }
+        public override string ToString()
+        {
+            return $"{{FoodId: {FoodId},ItemName: {ItemName}, Price: {Price}, FoodQuantity: {FoodQuantity}, InStock: {InStock}}}"; ;
+        }
     }
 }

@@ -5,11 +5,31 @@ namespace Project2.Models
     public class Purchase
     {
         public int PurchaseId { get; set; } //Primary Key
-        public int Quantity { get; set; }
-        public double Cost { get; set; }
+        public int UserId { get; set; } //foreign key, 
+        public int FoodId { get; set; }
+        public int PurchaseQuantity { get; set; }
+        public decimal Cost { get; set; }
         public long PurchaseDate { get; set; }
 
-        public User UserId { get; set; } //Foreign key
-        public Food FoodId { get; set; } //Foreign key
+        public User User { get; set; } //Foreign key connection
+
+
+
+        public Purchase() { }
+
+        public Purchase(int purchaseId, int userId, int foodId, int purchaseQuantity, decimal cost, long purchaseDate)
+        {
+            PurchaseId = purchaseId;
+            UserId = userId;
+            FoodId = foodId;
+            PurchaseQuantity = purchaseQuantity;
+            Cost = cost;
+            PurchaseDate = purchaseDate;
+        }
+        public override string ToString()
+        {
+            return $"{{PurchaseId: {PurchaseId},UserId: {UserId}, FoodId: {FoodId}, PurchaseQuantity: {PurchaseQuantity}, Cost: {Cost}, PurchaseDate: {PurchaseDate}}}"; ;
+        }
+
     }
 }

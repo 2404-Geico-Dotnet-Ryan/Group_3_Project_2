@@ -26,24 +26,17 @@ namespace Project2.Data
         // enforced
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // One-to-One relationship
+            // One-to-Many relationship
             modelBuilder.Entity<User>()
-                    .HasOne(r => r.RoleId)
-                    .WithOne(u => u.User)
-                    .HasForeignKey<Role>(r => r.RoleId);
+                .HasMany(p => p.Purchases)
+                .WithOne(u => u.User)
+                .HasForeignKey(u => u.UserId);
 
-            // One-to-One relationship
-            modelBuilder.Entity<Purchase>()
-                    .HasOne(c => c.UserId)
-                    .WithOne(u => u.PurchaseId)
-                    .HasForeignKey<User>(u => u.UserId);
-
-            // One-to-One relationship
-            modelBuilder.Entity<Purchase>()
-                    .HasOne(f => f.FoodId)
-                    .WithOne(u => u.PurchaseId)
-                    .HasForeignKey<Food>(f => f.FoodId);
-
+            //One-to-One relationship
+            modelBuilder.Entity<Role>()
+                .HasOne(u => u.User)
+                .WithOne(r => r.Role)
+                .HasForeignKey<User>(u => u.UserId);
         }
     }
 }
