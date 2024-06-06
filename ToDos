@@ -2,12 +2,12 @@ To Do:
   1.  on the original project, get View Last Purchased working
   2.  (not yet, build models together first then branch) set up branches, and reflect Main in each of our local branches
   3.  Next steps:
-      a. figure out models
+      a. figure out models (DONE)
          i. what will we need on the website? carts, track purchases, admin v user and capabilities
           ii. Roles in User table as Foreign key, then Role table (lookup table) with Id PK, Name (user, admin)
           iii. Food table, have quantity instead of user directly associated, add available/Instock whether ; create Purchase table, Id for purchases, user (fk), foodId (fk), quantity, cost, time(?)
 
-      b. THEN DTOs: how do we apply CRUD to each, User, Role, Food, Purchases
+      b. THEN DTOs: how do we apply CRUD to each, User, Role, Food, Purchases (DONE)
           What does the client need to work with the api?
           ie User, user id name and pw, but wont need roleId
 
@@ -16,8 +16,10 @@ To Do:
           (purchase crud - quantity of food going below zero to update instock )
           most likely wont utilize Delete, but maybe User wants to delete an account.
 
-      c. THEN CONTROLLERS AND SERVICES
+      c. THEN CONTROLLERS AND SERVICES (templates laid out...)
 
 *Switch to EF for model updates
 meeting next week to check on projects, expect for us to be working on controllers next week
+
+**Need to figureout tables for when folks clone and copy
 
