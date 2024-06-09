@@ -20,7 +20,7 @@ namespace Project2.DTOs
         public long PurchaseDate { get; set; }
     }
 
-    public class RoleDTO
+    public class RoleDTO //Look up table, so do we need this DTO?
     {
         public int RoleId { get; set; }
         public string? UserType { get; set; }

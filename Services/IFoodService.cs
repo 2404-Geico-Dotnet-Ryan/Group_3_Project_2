@@ -5,7 +5,7 @@ namespace Project2.Services
 {
     public interface IFoodService
     {
-        // Method to get a list of all users
+        // Method to get a list of all users, foreach loop
         IEnumerable<FoodDTO> GetAllFoods();
 
         // Method to get a specific user by their ID

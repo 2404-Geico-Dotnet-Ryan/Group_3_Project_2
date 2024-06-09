@@ -8,7 +8,8 @@ namespace Project2.Controllers
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly IUserService _userService; //this is a field scoped to the user controller, allowing us
+        //to be able to use the userService anywhere in this controller
 
         // Constructor to inject the user service
         public UsersController(IUserService userService)
@@ -60,5 +61,7 @@ namespace Project2.Controllers
             _userService.DeleteUser(UserId);
             return Ok();
         }
-    }
+
+   }
+
 }
