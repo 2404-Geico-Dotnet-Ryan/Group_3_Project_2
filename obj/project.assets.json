@@ -4524,19 +4524,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\U1H071\\.nuget\\packages\\": {}
+    "C:\\Users\\U1D028\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\U1H071\\Revature Training\\Project2\\Project2.csproj",
+      "projectUniqueName": "C:\\! Coding Practice\\C#\\Revature\\Repos\\Group_3_Project_2\\Project2.csproj",
       "projectName": "Project2",
-      "projectPath": "C:\\Users\\U1H071\\Revature Training\\Project2\\Project2.csproj",
-      "packagesPath": "C:\\Users\\U1H071\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\U1H071\\Revature Training\\Project2\\obj\\",
+      "projectPath": "C:\\! Coding Practice\\C#\\Revature\\Repos\\Group_3_Project_2\\Project2.csproj",
+      "packagesPath": "C:\\Users\\U1D028\\.nuget\\packages\\",
+      "outputPath": "C:\\! Coding Practice\\C#\\Revature\\Repos\\Group_3_Project_2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\U1H071\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\U1D028\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
