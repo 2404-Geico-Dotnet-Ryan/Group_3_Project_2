@@ -16,10 +16,12 @@ To Do:
           (purchase crud - quantity of food going below zero to update instock )
           most likely wont utilize Delete, but maybe User wants to delete an account.
 
-      c. THEN CONTROLLERS AND SERVICES (templates laid out...)
+      c. THEN CONTROLLERS AND SERVICES (Food and User done - roles is just a look up     table, rebecca working on Purchases) 
 
-*Switch to EF for model updates
+      d. HTML and JavaScript - Amanda working on this 
+
+*Switch to EF for model updates (in progress almost done)
 meeting next week to check on projects, expect for us to be working on controllers next week
 
-**Need to figureout tables for when folks clone and copy
-
+**Need to figureout tables for when folks clone and copy (done - we have all cloned and read to go)
+ Other updates in agreement for our todos going forward. 6/9/2024
