@@ -17,7 +17,7 @@ namespace Project2.DTOs
         public int FoodId { get; set; }
         public int PurchaseQuantity { get; set; }
         public decimal Cost { get; set; }
-        public long PurchaseDate { get; set; }
+        public DateTime PurchaseDate { get; set; }
     }
 
     public class RoleDTO

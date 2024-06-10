@@ -9,7 +9,7 @@ namespace Project2.Models
         public int FoodId { get; set; } //foreign?
         public int PurchaseQuantity { get; set; }
         public decimal Cost { get; set; }
-        public long PurchaseDate { get; set; }
+        public DateTime PurchaseDate { get; set; }
 
         public User User { get; set; } //Foreign key connection
 
@@ -17,7 +17,7 @@ namespace Project2.Models
 
         public Purchase() { }
 
-        public Purchase(int purchaseId, int userId, int foodId, int purchaseQuantity, decimal cost, long purchaseDate)
+        public Purchase(int purchaseId, int userId, int foodId, int purchaseQuantity, decimal cost, DateTime purchaseDate)
         {
             PurchaseId = purchaseId;
             UserId = userId;

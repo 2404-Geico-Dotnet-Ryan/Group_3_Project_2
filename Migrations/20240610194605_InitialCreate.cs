@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -70,7 +71,7 @@ namespace Project2.Migrations
                     FoodId = table.Column<int>(type: "int", nullable: false),
                     PurchaseQuantity = table.Column<int>(type: "int", nullable: false),
                     Cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PurchaseDate = table.Column<long>(type: "bigint", nullable: false)
+                    PurchaseDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
