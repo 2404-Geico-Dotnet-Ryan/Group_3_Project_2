@@ -1,14 +1,32 @@
 Working Agreement
 Team Roster and Ownership
-  	Reuben Lewis - Food Menu Controller, has food items that handles food items
-  	Rebecca Chester - Drink Menu Controller - has drink items that handles drink items
-  	Kim Kitts – User Controller, has users that handles our logins
-  	Amanda Ward - Category/Product Controller - has drink/food category/product that handles reordering of inventory
+   Reuben Lewis - 
+    - Food Menu Controller, has food items that handles food items
+        - he completed the food service on 6/8/20244
+    - Login HTMl and java Scripts for the front end (working with Amanda on)
+   Rebecca Chester - Purchase Services- has drink/food category/product that handles reordering of inventory
+   Kim Kitts – 
+   Amanda Ward - user HTMl and java Scripts for the front end (working with Rueben on this )
+  * Progress completed 
+      - Food (controller, Iservice, service)
+      - Purchases (controller, Iservice)
+      - Roles (controller, Iservice)  - 
+      - Users (controller, Iservice, Service)
+      - DTO 
+      - Migrations 
+      - App DB Context 
+
+  * to dos
+     - HTML and java (Login)
+     - HTML and java (user)
+     - Purchase Service 
+     - Program file 
+     - 
 Availability
-  	Reuben Lewis – M-F, 7am – 4**; Saturday, Sunday, 
-  	Rebecca Chester - M-F, 7am – 4**; Saturday, Sunday(PM), *except the 8th
-  	Kim Kitts - M-F,  ?a – 3pm ; 
-  	Amanda Ward - M-F, 7am – 4pm**; Saturday(PM), Sunday(PM),
+   Reuben Lewis – M-F, 7am – 4**; Saturday, Sunday, 
+   Rebecca Chester - M-F, 7am – 4**; Saturday, Sunday(PM), *except the 8th
+   Kim Kitts - M-F,  ?a – 3pm ; 
+   Amanda Ward - M-F, 7am – 4pm**; Saturday(PM), Sunday(PM),
 **Flexibility to work additional hours outside of core
 
 Goal – Meet project requirements
@@ -17,38 +35,37 @@ Goal – Meet project requirements
   Presentation Date: 6/20/24
 
 Team Norms
-  	Communicating Days Not Available: 
-    o	Amanda: only available until 330 every Tuesday
-    o	Reuben:
-    o	Rebecca: Saturday 8th
-    o	Kim: 5th off at 1pm, each day ends at 3pm
+   Communicating Days Not Available: 
+    o Amanda: only available until 330 every Tuesday
+    o Reuben:
+    o Rebecca: Saturday 8th
+    o Kim: 5th off at 1pm, each day ends at 3pm
 
-	Expectations:
-    o	After one day of churn time (no progress being made on a work item), the team member is expected to reach out to the team for help 
-    o	Daily check-ins, where we meet for 15 minutes to discuss what we’ve worked on, any impediments, concerns
-    o	Push work in the AM before meeting with team
-  	How and when pushing to Main, at least every other day
-  	Pull request review, done in a group setting
-    o	Due Dates:
-  	Controllers and Services due by:
-  	HTML etc due by:
+ Expectations:
+    o After one day of churn time (no progress being made on a work item), the team member is expected to reach out to the team for help 
+    o Daily check-ins, where we meet for 15 minutes to discuss what we’ve worked on, any impediments, concerns
+    o Push work in the AM before meeting with team
+   How and when pushing to Main, at least every other day
+   Pull request review, done in a group setting
+    o Due Dates:
+   Controllers and Services due by:
+   HTML etc due by:
 
-	Communication
-    o	WebEx chat is the GEICO standard
-    o	WebEx meetings
-    o	Texting(optional):
-        	Rebecca – provided via group chat
-        	Amanda – provided via group chat
-        	Reuben - provided via group chat
-        	Kim - pending
+ Communication
+    o WebEx chat is the GEICO standard
+    o WebEx meetings
+    o Texting(optional):
+         Rebecca – provided via group chat
+         Amanda – provided via group chat
+         Reuben - provided via group chat
+         Kim - pending
 
-	Definition of Urgent Issue
-    o	Near end 6/14, and someone is blocked by another team member 
-    o	When a team member absolutely needs help from another team member and time is critical
+ Definition of Urgent Issue
+    o Near end 6/14, and someone is blocked by another team member 
+    o When a team member absolutely needs help from another team member and time is critical
 
-	Documentation
-    o	To be kept  within the Group 3 Project 2 repo as markdown files
+ Documentation
+    o To be kept  within the Group 3 Project 2 repo as markdown files
 Work Items
-  	Test Cases
-    o	Work as a group to create Test Cases
-
+   Test Cases
+    o Work as a group to create Test Cases
