@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 // Register any new services into the dependency container
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IFoodService, FoodService>();
+builder.Services.AddScoped<IPurchaseService, PurchaseService>();
 
 
 builder.Services.AddDbContext<AppDbContext>(options =>
