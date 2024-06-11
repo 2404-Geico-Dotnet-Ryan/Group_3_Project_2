@@ -33,4 +33,16 @@ namespace Project2.DTOs
         public string? Password { get; set; }
         public int RoleId { get; set; }
     }
+
+    public class UserLoginDTO
+        {
+            public string? UserName {get;set;}
+            public  string? Password {get;set;}
+        }
+
+    // public class LoginResponseDTO
+    //     {
+    //         public string? UserName {get;set;}
+    //         public string? Authorization {get;set;}
+    //     }
 }

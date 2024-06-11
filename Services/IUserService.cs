@@ -19,5 +19,7 @@ namespace Project2.Services
 
         // Method to delete a user based on their ID
         void DeleteUser(int UserId);
+       
+       User LoginUser(UserLoginDTO userLogin);
     }
 }

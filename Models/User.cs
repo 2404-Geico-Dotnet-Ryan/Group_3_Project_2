@@ -4,6 +4,7 @@ namespace Project2.Models
 {
     public class User //SQL table is called Logins due to User being a reserved word
     {
+
         public int UserId { get; set; } //Primary Key
         public string? UserName { get; set; }
         public string? Password { get; set; }
