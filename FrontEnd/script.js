@@ -1,4 +1,4 @@
-//const BASE_URL = "http://localhost:5236";
+const BASE_URL = "http://localhost:5152";
 
 let current_user = {};
 

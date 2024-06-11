@@ -109,6 +109,27 @@ namespace Project2.Services
             }
         }
 
-    }
+        public User LoginUser(UserLoginDTO userLogin)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.UserName == userLogin.UserName && u.Password == userLogin.Password);
+            if (user == null)
+            {
+                return null; // Indicate failure to find the user
+            }
 
+            // Convert the User entity to a UserDTO
+            var userDto = ConvertUserToUserDTO(user);
+
+            return user;
+        }
+        private UserDTO ConvertUserToUserDTO(User user)
+        {
+            return new UserDTO
+            {
+                UserName = user.UserName,
+                Password = user.Password, 
+            };
+        }
+    }
 }
+
