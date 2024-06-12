@@ -1,6 +1,7 @@
 using Project2.Models;
 using Project2.Data;
 using Microsoft.EntityFrameworkCore;
+using Project2.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddScoped<IUserService, UserService>();
+// Register any new services into the dependency container
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IFoodService, FoodService>();
+builder.Services.AddScoped<IPurchaseService, PurchaseService>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder => builder.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+});
 
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -33,5 +45,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors("AllowAll");
 
 app.Run();
