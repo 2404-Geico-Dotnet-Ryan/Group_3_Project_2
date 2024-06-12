@@ -7,6 +7,7 @@ namespace Project2.Models
         public int RoleId { get; set; } //Primary Key
         public string? UserType { get; set; } // Admin, Customer
 
+        public ICollection<User> Users { get; set; }
 
         public Role() { }
 

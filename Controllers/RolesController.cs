@@ -20,7 +20,7 @@ namespace Project2.Controllers
         // GET: /Roles
         // Action method to handle GET requests to retrieve all roles
         [HttpGet]
-        public ActionResult<IEnumerable<RoleDTO>> GetRoles()
+        public ActionResult<IEnumerable<RoleDTO>> GetAllRoles()
         {
             var roles = _roleService.GetAllRoles();
             return Ok(roles);

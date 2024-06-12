@@ -11,7 +11,7 @@ namespace Project2.Models
         public int FoodQuantity { get; set; }
         public bool InStock { get; set; } //available or not
 
-        public Purchase Purchase { get; set; }
+        public ICollection<Purchase> Purchases { get; set; }
 
         public Food() { }
 
