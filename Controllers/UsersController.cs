@@ -87,14 +87,14 @@ namespace Project2.Controllers
                 // };
             }
 
-            [HttpGet("protected")]
-             public async Task<IActionResult> ProtectedEndpoint([FromHeader] string Authorization)
-                {
-                    if(Authorization == "Admin"){
-                         return Ok("Hi there admin!");
-                    }else{
-                        return Unauthorized("You are not an admin!");
-                        }
-                }
+            // [HttpGet("protected")]
+            //  public async Task<IActionResult> ProtectedEndpoint([FromHeader] string Authorization)
+            //     {
+            //         if(Authorization == "Admin"){
+            //              return Ok("Hi there admin!");
+            //         }else{
+            //             return Unauthorized("You are not an admin!");
+            //             }
+            //     }
         }
     }

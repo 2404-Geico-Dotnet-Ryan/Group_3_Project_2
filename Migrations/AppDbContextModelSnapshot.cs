@@ -72,8 +72,7 @@ namespace Project2.Migrations
 
                     b.HasKey("PurchaseId");
 
-                    b.HasIndex("FoodId")
-                        .IsUnique();
+                    b.HasIndex("FoodId");
 
                     b.HasIndex("UserId");
 
@@ -122,9 +121,9 @@ namespace Project2.Migrations
 
             modelBuilder.Entity("Project2.Models.Purchase", b =>
                 {
-                    b.HasOne("Project2.Models.Food", null)
-                        .WithOne("Purchase")
-                        .HasForeignKey("Project2.Models.Purchase", "FoodId")
+                    b.HasOne("Project2.Models.Food", "Food")
+                        .WithMany("Purchases")
+                        .HasForeignKey("FoodId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -134,13 +133,15 @@ namespace Project2.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Food");
+
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("Project2.Models.User", b =>
                 {
                     b.HasOne("Project2.Models.Role", "Role")
-                        .WithMany()
+                        .WithMany("Users")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -150,8 +151,12 @@ namespace Project2.Migrations
 
             modelBuilder.Entity("Project2.Models.Food", b =>
                 {
-                    b.Navigation("Purchase")
-                        .IsRequired();
+                    b.Navigation("Purchases");
+                });
+
+            modelBuilder.Entity("Project2.Models.Role", b =>
+                {
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("Project2.Models.User", b =>

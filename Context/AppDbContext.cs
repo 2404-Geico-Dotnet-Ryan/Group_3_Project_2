@@ -31,6 +31,16 @@ namespace Project2.Data
                 .HasMany(p => p.Purchases)
                 .WithOne(u => u.User)
                 .HasForeignKey(u => u.UserId);
+
+             modelBuilder.Entity<Purchase>()
+                .HasOne(p => p.Food)
+                .WithMany(f => f.Purchases)
+                .HasForeignKey(p => p.FoodId);
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Role)
+                .WithMany(r => r.Users)
+                .HasForeignKey(u=> u.RoleId);
         }
     }
 }

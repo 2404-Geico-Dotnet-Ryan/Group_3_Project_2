@@ -12,7 +12,7 @@ namespace Project2.Models
         public DateTime PurchaseDate { get; set; }
 
         public User User { get; set; } //Foreign key connection
-
+        public Food Food { get; set; } 
 
 
         public Purchase() { }

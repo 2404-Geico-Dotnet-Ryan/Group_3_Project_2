@@ -21,7 +21,10 @@ namespace Project2.Services
             {
                 var user = new User
                 {
-                    UserName = UserDto.UserName
+                    UserName = UserDto.UserName,
+                    Password = UserDto.Password,
+                    RoleId = UserDto.RoleId
+                    
                 };
 
                 _context.Users.Add(user);
@@ -64,7 +67,9 @@ namespace Project2.Services
                 .Select(u => new UserDTO
                 {
                     UserId = u.UserId,
-                    UserName = u.UserName
+                    UserName = u.UserName,
+                    Password = u.Password,
+                    RoleId= u.RoleId
                 }).ToList();
 
             return users;
@@ -79,8 +84,10 @@ namespace Project2.Services
             {
                 var userDto = new UserDTO
                 {
+                    UserId = user.UserId,
                     UserName = user.UserName,
-                    UserId = user.UserId
+                    Password = user.Password,
+                    RoleId= user.RoleId
                 };
 
                 return userDto;
@@ -99,6 +106,8 @@ namespace Project2.Services
             if (user != null)
             {
                 user.UserName = UpdatedUser.UserName;
+                user.Password = UpdatedUser.Password;
+                user.RoleId = UpdatedUser.RoleId;
 
                 _context.Users.Update(user);
                 _context.SaveChanges();
@@ -128,6 +137,7 @@ namespace Project2.Services
             {
                 UserName = user.UserName,
                 Password = user.Password, 
+
             };
         }
     }
