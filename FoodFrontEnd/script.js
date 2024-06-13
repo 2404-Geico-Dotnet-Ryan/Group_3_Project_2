@@ -30,7 +30,7 @@ const userContainerDiv = document.querySelector("#user-authorization-container")
 // User homepage containers
 const homePageContainerDiv = document.querySelector("#home-page-container");
 const userProfileContainerDiv = document.querySelector("#user-profile-container");
-const newCategoryContainerDiv = document.querySelector("#new-category-container");
+// const newFoodContainerDiv = document.querySelector("#new-category-container");
 const newFoodContainerDiv = document.querySelector("#new-food-container");
 const allFoodsContainerDiv = document.querySelector("#all-foods-container");
 
@@ -127,8 +127,8 @@ function tearDownHomePageContainer(){
 
 //     // This is used to wipe the slate clean
 //     // To prevent any kind of duplicate
-//     while(newCategoryContainerDiv.firstElementChild){
-//         newCategoryContainerDiv.firstElementChild.remove();
+//     while(newFoodContainerDiv.firstElementChild){
+//         newFoodContainerDiv.firstElementChild.remove();
 //     }
 
 //     let categoryNameInput = document.createElement("input");
@@ -142,9 +142,9 @@ function tearDownHomePageContainer(){
 //     let categorySubmitButton = document.createElement("button");
 //     categorySubmitButton.textContent = "Submit";
 
-//     newCategoryContainerDiv.appendChild(categoryLabel);
-//     newCategoryContainerDiv.appendChild(categoryNameInput);
-//     newCategoryContainerDiv.appendChild(categorySubmitButton);
+//     newFoodContainerDiv.appendChild(categoryLabel);
+//     newFoodContainerDiv.appendChild(categoryNameInput);
+//     newFoodContainerDiv.appendChild(categorySubmitButton);
 
 // }
 
@@ -168,10 +168,10 @@ function generateNewFoodContainer(){
     foodQuantityInput.type = "number";
     foodQuantityInput.placeholder = "Quantity";
 
-    let foodCategoryInput = document.createElement("input");
-    foodCategoryInput.id = "food-category-input";
-    foodCategoryInput.type = "text";
-    foodCategoryInput.placeholder = "Category";
+    // let foodCategoryInput = document.createElement("input");
+    // foodCategoryInput.id = "food-category-input";
+    // foodCategoryInput.type = "text";
+    // foodCategoryInput.placeholder = "Category";
 
     let foodInStockInput = document.createElement("input");
     foodInStockInput.id = "food-inStock-input";
@@ -187,13 +187,13 @@ function generateNewFoodContainer(){
     foodSubmitButton.addEventListener("click", getNewFoodInput);
 
 
-    newCategoryContainerDiv.appendChild(foodLabel);
-    newCategoryContainerDiv.appendChild(foodNameInput);
-    newCategoryContainerDiv.appendChild(foodPriceInput);
-    newCategoryContainerDiv.appendChild(foodQuantityInput);
-    newCategoryContainerDiv.appendChild(foodCategoryInput);
-    newCategoryContainerDiv.appendChild(foodInStockInput);
-    newCategoryContainerDiv.appendChild(foodSubmitButton);
+    newFoodContainerDiv.appendChild(foodLabel);
+    newFoodContainerDiv.appendChild(foodNameInput);
+    newFoodContainerDiv.appendChild(foodPriceInput);
+    newFoodContainerDiv.appendChild(foodQuantityInput);
+    // newFoodContainerDiv.appendChild(foodCategoryInput);
+    newFoodContainerDiv.appendChild(foodInStockInput);
+    newFoodContainerDiv.appendChild(foodSubmitButton);
 
 }
 
@@ -201,11 +201,11 @@ function getNewFoodInput(){
     let itemName = document.querySelector("#food-itemName-input").value;
     let price = document.querySelector("#food-price-input").value;
     let foodQuantity = document.querySelector("#food-foodQuantity-input").value;
-    let category = document.querySelector("#food-category-input").value;
+    // let category = document.querySelector("#food-category-input").value;
     let inStock = document.querySelector("#food-inStock-input").value;
 
-    if(itemName && price && category && foodQuantity && inStock){
-        CreateNewFood(itemName, price, foodQuantity, category, inStock);
+    if(itemName && price && foodQuantity && inStock){
+        CreateNewFood(itemName, price, foodQuantity, inStock);
     }else{
         NewFoodErrorField();
     }
@@ -473,32 +473,32 @@ async function GetAllFoods(){
 
 // Categories
 // CREATE
-async function CreateNewCategory(Name){
-    try{
-        let response = await fetch(`${BASE_URL}/Categories`, {
-            method: "POST",
-            headers: {
-                'Content-Type': "application/json" // Corrected the content type to 'application/json'
-            },
-            body: JSON.stringify({
-                Name
-            })
-        });
-        // let data = await response.json();
-        // console.log(data);
-        console.log(response);
-        if(response.ok){
-            // alert will create a pop up box that the user will see no matter waht
-            // This is not a good way of telling the user that what they did was successful or unsuccessful, it is just here as a placeholder for development purposes
-            // A preferable solution is a modal
-            alert("Category is created!")
-        }else{
-            alert("Category was not created")
-        }
-    }catch(error){
-        console.error(error);
-    }
-}
+// async function CreateNewCategory(Name){
+//     try{
+//         let response = await fetch(`${BASE_URL}/Categories`, {
+//             method: "POST",
+//             headers: {
+//                 'Content-Type': "application/json" // Corrected the content type to 'application/json'
+//             },
+//             body: JSON.stringify({
+//                 Name
+//             })
+//         });
+//         // let data = await response.json();
+//         // console.log(data);
+//         console.log(response);
+//         if(response.ok){
+//             // alert will create a pop up box that the user will see no matter waht
+//             // This is not a good way of telling the user that what they did was successful or unsuccessful, it is just here as a placeholder for development purposes
+//             // A preferable solution is a modal
+//             alert("Category is created!")
+//         }else{
+//             alert("Category was not created")
+//         }
+//     }catch(error){
+//         console.error(error);
+//     }
+// }
 // READ
 // UPDATE
 // DELETE
