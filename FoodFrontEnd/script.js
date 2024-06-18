@@ -30,7 +30,6 @@ const userContainerDiv = document.querySelector("#user-authorization-container")
 // User homepage containers
 const homePageContainerDiv = document.querySelector("#home-page-container");
 const userProfileContainerDiv = document.querySelector("#user-profile-container");
-const newCategoryContainerDiv = document.querySelector("#new-category-container");
 const newFoodContainerDiv = document.querySelector("#new-food-container");
 const allFoodsContainerDiv = document.querySelector("#all-foods-container");
 
@@ -110,7 +109,6 @@ GenerateLoginContainer();
 function generateHomePageContainer(userData){
 
     generateUserProfileContainer(userData);
-    //generateNewCategoryContainer();
     generateNewFoodContainer();
     generateAllFoodsContainer();
 }
@@ -122,78 +120,77 @@ function tearDownHomePageContainer(){
     }
 }
 
-
-// function generateNewCategoryContainer(){
-
-//     // This is used to wipe the slate clean
-//     // To prevent any kind of duplicate
-//     while(newCategoryContainerDiv.firstElementChild){
-//         newCategoryContainerDiv.firstElementChild.remove();
-//     }
-
-//     let categoryNameInput = document.createElement("input");
-//     categoryNameInput.id = "category-name-input";
-//     categoryNameInput.type = "text";
-//     categoryNameInput.placeholder = "Food, Drink, etc";
-
-//     let categoryLabel = document.createElement("h5");
-//     categoryLabel.textContent = "New Category Creator";
-
-//     let categorySubmitButton = document.createElement("button");
-//     categorySubmitButton.textContent = "Submit";
-
-//     newCategoryContainerDiv.appendChild(categoryLabel);
-//     newCategoryContainerDiv.appendChild(categoryNameInput);
-//     newCategoryContainerDiv.appendChild(categorySubmitButton);
-
-// }
-
+//GENERATE NEW FOOD CONTAINER
 function generateNewFoodContainer(){
     while(newFoodContainerDiv.firstChild){
         newFoodContainerDiv.firstChild.remove();
     }
 
+    //label: Food
+    let foodNameInputLabel = document.createElement('label');
+    foodNameInputLabel.textContent = "Food";
+
     let foodNameInput = document.createElement("input");
     foodNameInput.id = "food-itemName-input";
     foodNameInput.type = "text";
     foodNameInput.placeholder = "Food Name";
+    foodNameInput.style.display = "block";
+    
+    // Label: Price
+    let foodPriceInputLabel = document.createElement('label');
+    foodPriceInputLabel.textContent = "Price";
 
     let foodPriceInput = document.createElement("input");
     foodPriceInput.id = "food-price-input";
     foodPriceInput.type = "currency";
     foodPriceInput.placeholder = "Price";
+    foodPriceInput.style.display = "block";
+
+    //Label: Quantity
+    let foodQuantityInputLabel = document.createElement('label');
+    foodQuantityInputLabel.textContent = "Quantity";
 
     let foodQuantityInput = document.createElement("input");
     foodQuantityInput.id = "food-foodQuantity-input";
     foodQuantityInput.type = "number";
     foodQuantityInput.placeholder = "Quantity";
+    foodQuantityInput.style.display = "block";
 
-    let foodCategoryInput = document.createElement("input");
-    foodCategoryInput.id = "food-category-input";
-    foodCategoryInput.type = "text";
-    foodCategoryInput.placeholder = "Category";
+    //Label: In Stock
+    let foodInStockInputLabel = document.createElement('label');
+    foodInStockInputLabel.textContent = "In Stock?";
 
     let foodInStockInput = document.createElement("input");
     foodInStockInput.id = "food-inStock-input";
-    foodInStockInput.type = "text";
+    foodInStockInput.type = "checkbox";
     foodInStockInput.placeholder = "In Stock : true or false";
+    foodInStockInput.style.display = "block";
 
     let foodLabel = document.createElement("h5");
-    foodLabel.textContent = "New Food Creator";
+    foodLabel.textContent = "Add New Food Item";
 
     let foodSubmitButton = document.createElement("button");
     foodSubmitButton.textContent = "Submit";
 
     foodSubmitButton.addEventListener("click", getNewFoodInput);
 
+    // Append the fields and labels to the new food container
+    newFoodContainerDiv.appendChild(foodLabel);
+    newFoodContainerDiv.appendChild(foodNameInputLabel);
+    newFoodContainerDiv.appendChild(foodNameInput);
 
-    newCategoryContainerDiv.appendChild(foodLabel);
-    newCategoryContainerDiv.appendChild(foodNameInput);
-    newCategoryContainerDiv.appendChild(foodPriceInput);
-    newCategoryContainerDiv.appendChild(foodQuantityInput);
-    newCategoryContainerDiv.appendChild(foodCategoryInput);
-    newCategoryContainerDiv.appendChild(foodInStockInput);
-    newCategoryContainerDiv.appendChild(foodSubmitButton);
+    newFoodContainerDiv.appendChild(foodPriceInputLabel);
+    newFoodContainerDiv.appendChild(foodPriceInput);
+
+    newFoodContainerDiv.appendChild(foodQuantityInputLabel);
+    newFoodContainerDiv.appendChild(foodQuantityInput);
+   
+    newFoodContainerDiv.appendChild(foodInStockInputLabel);
+    newFoodContainerDiv.appendChild(foodInStockInput);
+
+    //Submit Button
+    newFoodContainerDiv.appendChild(foodSubmitButton);
+    
 
 }
 
@@ -201,11 +198,10 @@ function getNewFoodInput(){
     let itemName = document.querySelector("#food-itemName-input").value;
     let price = document.querySelector("#food-price-input").value;
     let foodQuantity = document.querySelector("#food-foodQuantity-input").value;
-    let category = document.querySelector("#food-category-input").value;
-    let inStock = document.querySelector("#food-inStock-input").value;
+    let inStock = document.querySelector("#food-inStock-input").checked;
 
-    if(itemName && price && category && foodQuantity && inStock){
-        CreateNewFood(itemName, price, foodQuantity, category, inStock);
+    if(itemName && price && foodQuantity && inStock){
+        CreateNewFood(itemName, price, foodQuantity, inStock);
     }else{
         NewFoodErrorField();
     }
@@ -262,8 +258,6 @@ function generateFoodElement(food){
     foodPriceLabel.textContent = food.price;
     let foodFoodQuantityLabel = document.createElement("h5");
     foodFoodQuantityLabel.textContent = food.foodQuantity;
-    // let foodCategoryNameLabel = document.createElement("h5");
-    // foodCategoryNameLabel.textContent = food.categoryName;
     let foodInStockLabel = document.createElement("h5");
     foodInStockLabel.textContent = food.inStock;
     
@@ -284,7 +278,6 @@ function generateFoodElement(food){
     foodElementDiv.appendChild(foodNameLabel);
     foodElementDiv.appendChild(foodPriceLabel);
     foodElementDiv.appendChild(foodFoodQuantityLabel);
-    // foodElementDiv.appendChild(foodCategoryNameLabel);
     foodElementDiv.appendChild(foodInStockLabel);
 
 
@@ -416,7 +409,7 @@ async function CreateNewUser(username, password, email){
 
 // Foods
 // CREATE
-async function CreateNewFood(ItemName, Price, FoodQuantity, InStock){
+async function CreateNewFood(itemName, price, foodQuantity, inStock){
     try{
         let response = await fetch(`${BASE_URL}/Foods`, {
             method: "POST",
@@ -424,15 +417,18 @@ async function CreateNewFood(ItemName, Price, FoodQuantity, InStock){
                 'Content-Type': "application/json" // Corrected the content type to 'application/json'
             },
             body: JSON.stringify({
-                "FoodId": -1,
-                ItemName,
-                Price,
-                FoodQuantity,
-                InStock
+                itemName,
+                price,
+                foodQuantity,
+                inStock
             })
         });
         // let data = await response.json();
         // console.log(data);
+
+
+                    
+
         console.log(response);
         if(response.ok){
             // alert will create a pop up box that the user will see no matter waht
@@ -468,58 +464,3 @@ async function GetAllFoods(){
         console.error(error);
     }
 }
-// UPDATE
-// DELETE
-
-// Categories
-// CREATE
-async function CreateNewCategory(Name){
-    try{
-        let response = await fetch(`${BASE_URL}/Categories`, {
-            method: "POST",
-            headers: {
-                'Content-Type': "application/json" // Corrected the content type to 'application/json'
-            },
-            body: JSON.stringify({
-                Name
-            })
-        });
-        // let data = await response.json();
-        // console.log(data);
-        console.log(response);
-        if(response.ok){
-            // alert will create a pop up box that the user will see no matter waht
-            // This is not a good way of telling the user that what they did was successful or unsuccessful, it is just here as a placeholder for development purposes
-            // A preferable solution is a modal
-            alert("Category is created!")
-        }else{
-            alert("Category was not created")
-        }
-    }catch(error){
-        console.error(error);
-    }
-}
-// READ
-// UPDATE
-// DELETE
-
-
-// Test these API calls as you are making them so that you can verify that it works inside your script before you actually use them in your website
-// GetAllUsers();
-// GetUserById(1);
-
-// CreateNewUser("user2", "pass2", "user2@email.com");
-
-
-// CreateNewCategory("Drink");
-// CreateNewCategory("Toy");
-// CreateNewCategory("Electronic");
-
-
-// CreateNewFood("Water", 1.00, "Drink", true);
-// CreateNewFood("Pokemon Toy", 2.00, "Toy", true);
-// CreateNewFood("Gadget", 20.00, "Electronic", true);
-
-
-// GetAllFoods();
-// GetFoodById(2);
