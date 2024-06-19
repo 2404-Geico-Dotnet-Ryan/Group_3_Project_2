@@ -12,6 +12,8 @@ const homePageContainerDiv = document.querySelector("#home-page-container");
 const userProfileContainerDiv = document.querySelector("#user-profile-container");
 const newFoodContainerDiv = document.querySelector("#new-food-container");
 const allFoodsContainerDiv = document.querySelector("#all-foods-container");
+const newPurchaseContainerDiv = document.querySelector("#new-purchase-container");
+// const allPurchasesContainerDiv = document.querySelector("#all-purchases-container");
 
 // Login Container Creation Function
 function GenerateLoginContainer() {
@@ -186,6 +188,8 @@ function generateHomePageContainer(userData) {
     generateUserProfileContainer(userData);
     generateNewFoodContainer();
     generateAllFoodsContainer();
+    generateNewPurchaseContainer();
+    // generateAllPurchasesContainer();
 }
 
 // teardown the homepage for the user
@@ -361,6 +365,150 @@ function generateFoodElement(food) {
 
     return foodElementDiv;
 }
+function generateNewPurchaseContainer(){
+    while(newPurchaseContainerDiv.firstChild){
+        newPurchaseContainerDiv.firstChild.remove();
+    }
+    //label : UserID
+    let purchaseUserIdInputLabel = document.createElement('label');
+    purchaseUserIdInputLabel.textContent = "UserId";
+
+    let purchaseUserIdInput = document.createElement("input");
+    purchaseUserIdInput.id = "purchase-userId-input";
+    purchaseUserIdInput.type = "number";
+    purchaseUserIdInput.placeholder = "User ID";
+    purchaseUserIdInput.style.display = "block";
+    
+    //label : FoodId
+    let purchaseFoodIdInputLabel = document.createElement('label');
+    purchaseFoodIdInputLabel.textContent = "FoodId";
+
+    let purchaseFoodIdInput = document.createElement("input");
+    purchaseFoodIdInput.id = "purchase-foodId-input";
+    purchaseFoodIdInput.type = "number";
+    purchaseFoodIdInput.placeholder = "Food ID";
+    purchaseFoodIdInput.style.display = "block";
+
+    //label : Purchase Quantity
+    let purchasePurchaseQuantityInputLabel = document.createElement('label');
+    purchasePurchaseQuantityInputLabel.textContent = "Purchase Quantity";
+
+    let purchasePurchaseQuantityInput = document.createElement("input");
+    purchasePurchaseQuantityInput.id = "purchase-purchaseQuantity-input";
+    purchasePurchaseQuantityInput.type = "number";
+    purchasePurchaseQuantityInput.placeholder = "Purchase Quantity";
+    purchasePurchaseQuantityInput.style.display = "block";
+
+    //label : Cost
+    let purchaseCostInputLabel = document.createElement('label');
+    purchaseCostInputLabel.textContent = "Cost";
+    
+    let purchaseCostInput = document.createElement("input");
+    purchaseCostInput.id = "purchase-cost-input";
+    purchaseCostInput.type = "currency";
+    purchaseCostInput.placeholder = "Cost";
+    purchaseCostInput.style.display = "block";
+
+     //label : Purchase Date
+     let purchasePurchaseDateInputLabel = document.createElement('label');
+     purchasePurchaseDateInputLabel.textContent = "Purchase Date";
+     
+     let purchasePurchaseDateInput = document.createElement("input");
+     purchasePurchaseDateInput.id = "purchase-purchaseDate-input";
+     purchasePurchaseDateInput.type = "datetime-local";
+     purchasePurchaseDateInput.placeholder = "Purchase Date";
+     purchasePurchaseDateInput.style.display = "block";
+
+     let purchaseLabel = document.createElement("h5");
+     purchaseLabel.textContent = "Create New Purchase";
+
+     let purchaseSubmitButton = document.createElement("button");
+     purchaseSubmitButton.textContent = "Purchase";
+
+    purchaseSubmitButton.addEventListener("click", getNewPurchaseInput);
+
+    homePageContainerDiv.appendChild(newPurchaseContainerDiv);
+    //Apend the fields and labels to the new purchase container
+    newPurchaseContainerDiv.appendChild(purchaseLabel);
+    newPurchaseContainerDiv.appendChild(purchaseUserIdInputLabel);
+    newPurchaseContainerDiv.appendChild(purchaseUserIdInput);
+    newPurchaseContainerDiv.appendChild(purchaseFoodIdInputLabel);
+    newPurchaseContainerDiv.appendChild(purchaseFoodIdInput);
+    newPurchaseContainerDiv.appendChild(purchasePurchaseQuantityInputLabel);
+    newPurchaseContainerDiv.appendChild(purchasePurchaseQuantityInput);
+    newPurchaseContainerDiv.appendChild(purchaseCostInputLabel);
+    newPurchaseContainerDiv.appendChild(purchaseCostInput);
+    newPurchaseContainerDiv.appendChild(purchasePurchaseDateInputLabel);
+    newPurchaseContainerDiv.appendChild(purchasePurchaseDateInput);
+    newPurchaseContainerDiv.appendChild(purchaseSubmitButton);
+
+}
+
+function getNewPurchaseInput(){
+    let userId = document.querySelector("#purchase-userId-input").value;
+    let foodId = document.querySelector("#purchase-foodId-input").value;
+    let purchaseQuantity = document.querySelector("#purchase-purchaseQuantity-input").value;
+    let cost = document.querySelector("#purchase-cost-input").value; 
+    let purchaseDate = document.querySelector("#purchase-purchaseDate-input").value;    
+    if(userId && foodId && purchaseQuantity && cost && purchaseDate){
+        CreateNewPurchase(userId, foodId, purchaseQuantity, cost, purchaseDate);
+    }else{
+        NewPurchaseErrorField();
+    }
+
+}
+function NewPurchaseErrorField() { }
+
+async function generateAllPurchasesContainer(){
+        while(allPurchasesContainerDiv.firstChild){
+        allPurchasesContainerDiv.firstChild.remove();
+        }
+
+    let purchases = await GetAllPurchases();
+        for (const purchase of purchases) {
+        let elementCreated = generatePurchaseElement(purchase);
+        allPurchasesContainerDiv.appendChild(elementCreated);
+        }
+}
+function generatePurchaseElement(purchase){
+    let purchaseElementDiv = document.createElement("div");
+    purchaseElementDiv.id = `purchase-${purchase.purchaseId}`;
+    
+    let purchasePurchaseIdLabel = document.createElement("h5");
+    purchasePurchaseIdLabel.textContent = "Purchase Id: "+ purchase.PurchaseId;
+    
+    let purchaseUserIdLabel = document.createElement("h5");
+    purchaseUserIdLabel.textContent = "User Id: " + purchase.UserId;
+    
+    let purchaseFoodIdLabel = document.createElement("h5");
+    purchaseFoodIdLabel.textContent = "Food Id: " +purchase.FoodId;
+    
+    let purchasePurchaseQuantityLabel = document.createElement("h5");
+    purchasePurchaseQuantityLabel.textContent = "purchase Quantity: " + purchase.PurchaseQuantity;
+    
+    let purchaseCostLabel = document.createElement("h5");
+    purchaseCostLabel.textContent = "Purchase Cost: " + purchase.Cost;
+    
+    let purchasePurchaseDateLabel= document.createElement("h5");
+    purchasePurchaseDateLabel.textContent = "Purchase Date: " + purchase.PurchaseDate;
+    
+    console.log(purchase);
+
+    homePageContainerDiv.appendChild(purchaseElementDiv);
+
+    purchaseElementDiv.appendChild(purchasePurchaseIdLabel);
+    purchaseElementDiv.appendChild(purchaseUserIdLabel);
+    purchaseElementDiv.appendChild(purchaseFoodIdLabel);
+    purchaseElementDiv.appendChild(purchasePurchaseQuantityLabel);
+    purchaseElementDiv.appendChild(purchaseCostLabel);
+    purchaseElementDiv.appendChild(purchasePurchaseDateLabel);
+
+
+    purchaseElementDiv.style.border = "thick solid #f8f1fe";
+    purchaseElementDiv.style.textAlign = "center";
+
+    return purchaseElementDiv;
+}
 
 
 // User Controller Functions
@@ -445,6 +593,35 @@ async function CreateNewFood(itemName, price, foodQuantity, inStock) {
         console.error(error);
     }
 }
+
+async function CreateNewPurchase(userId, foodId, purchaseQuantity, cost, purchaseDate){
+    try{
+        let response = await fetch(`${BASE_URL}/Purchases`, {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json" // Corrected the content type to 'application/json'
+            },
+            body: JSON.stringify({
+                userId,
+                foodId,
+                purchaseQuantity,
+                cost,
+                purchaseDate
+            })
+        });
+        // let data = await response.json();
+        // console.log(data);
+        console.log(response);
+        if(response.ok){
+            alert("Purchase has been created!")
+        }else{
+            alert("Purchase was not created")
+        }
+    }catch(error){
+        console.error(error);
+    }
+}
+
 // READ
 // Get by id
 async function GetFoodById(id) {
@@ -457,6 +634,16 @@ async function GetFoodById(id) {
     }
 }
 
+async function GetPurchaseById(id){
+    try{
+        let response = await fetch(`${BASE_URL}/Purchase/${id}`);
+        let data = await response.json();
+        console.log(data);
+    }catch(error){
+        console.error(error);
+    }
+}
+
 // Get all of them
 async function GetAllFoods() {
     try {
@@ -465,5 +652,15 @@ async function GetAllFoods() {
         return data;
     } catch (error) {
         console.error(error);
+    }
+
+async function GetAllPurchases(){
+    try{
+        let response = await fetch(`${BASE_URL}/Purchases`);
+        let data = await response.json();
+        return data;
+    } catch(error){
+        console.error(error);
+    }
     }
 }
