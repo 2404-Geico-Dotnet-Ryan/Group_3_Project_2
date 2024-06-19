@@ -29,7 +29,6 @@ const newUserContainerDiv = document.querySelector("#new-user-container");
 // User homepage containers
 const homePageContainerDiv = document.querySelector("#home-page-container");
 const userProfileContainerDiv = document.querySelector("#user-profile-container");
-// const newFoodContainerDiv = document.querySelector("#new-category-container");
 const newFoodContainerDiv = document.querySelector("#new-food-container");
 const allFoodsContainerDiv = document.querySelector("#all-foods-container");
 //const menuContainerDiv = document.querySelector("#menu-container");
@@ -188,7 +187,6 @@ GenerateAddUserContainer();
 function generateHomePageContainer(userData){
 
     generateUserProfileContainer(userData);
-    //generateNewCategoryContainer();
     generateNewFoodContainer();
     generateAllFoodsContainer();
 }
@@ -200,32 +198,7 @@ function tearDownHomePageContainer(){
     }
 }
 
-
-// function generateNewCategoryContainer(){
-
-//     // This is used to wipe the slate clean
-//     // To prevent any kind of duplicate
-//     while(newFoodContainerDiv.firstElementChild){
-//         newFoodContainerDiv.firstElementChild.remove();
-//     }
-
-//     let categoryNameInput = document.createElement("input");
-//     categoryNameInput.id = "category-name-input";
-//     categoryNameInput.type = "text";
-//     categoryNameInput.placeholder = "Food, Drink, etc";
-
-//     let categoryLabel = document.createElement("h5");
-//     categoryLabel.textContent = "New Category Creator";
-
-//     let categorySubmitButton = document.createElement("button");
-//     categorySubmitButton.textContent = "Submit";
-
-//     newFoodContainerDiv.appendChild(categoryLabel);
-//     newFoodContainerDiv.appendChild(categoryNameInput);
-//     newFoodContainerDiv.appendChild(categorySubmitButton);
-
-// }
-
+//GENERATE NEW FOOD CONTAINER
 function generateNewFoodContainer(){
     while(newFoodContainerDiv.firstChild){
         newFoodContainerDiv.firstChild.remove();
@@ -356,6 +329,7 @@ function generateFoodElement(food){
     let foodElementDiv = document.createElement("div");
     foodElementDiv.id = `food-${food.foodId}`;
 
+
     let foodIdLabel0 = document.createElement("h6");
     foodIdLabel0.textContent = "Food ID: " + food.foodId;
 
@@ -372,6 +346,7 @@ function generateFoodElement(food){
     foodFoodQuantityLabel.textContent = "Quantity: " +  food.foodQuantity;
 
     let foodInStockLabel = document.createElement("h6");
+
     foodInStockLabel.textContent = food.inStock;
     
     //if boolean value is true, then it will display "Available" else "Unavailable"
@@ -540,7 +515,9 @@ async function CreateNewFood(itemName, price, foodQuantity, inStock){
                 foodQuantity,
                 inStock
             })
+
         });                 
+
 
 
         console.log(response);
@@ -578,58 +555,3 @@ async function GetAllFoods(){
         console.error(error);
     }
 }
-// UPDATE
-// DELETE
-
-// Categories
-// CREATE
-// async function CreateNewCategory(Name){
-//     try{
-//         let response = await fetch(`${BASE_URL}/Categories`, {
-//             method: "POST",
-//             headers: {
-//                 'Content-Type': "application/json" // Corrected the content type to 'application/json'
-//             },
-//             body: JSON.stringify({
-//                 Name
-//             })
-//         });
-//         // let data = await response.json();
-//         // console.log(data);
-//         console.log(response);
-//         if(response.ok){
-//             // alert will create a pop up box that the user will see no matter waht
-//             // This is not a good way of telling the user that what they did was successful or unsuccessful, it is just here as a placeholder for development purposes
-//             // A preferable solution is a modal
-//             alert("Category is created!")
-//         }else{
-//             alert("Category was not created")
-//         }
-//     }catch(error){
-//         console.error(error);
-//     }
-// }
-// READ
-// UPDATE
-// DELETE
-
-
-// Test these API calls as you are making them so that you can verify that it works inside your script before you actually use them in your website
-// GetAllUsers();
-// GetUserById(1);
-
-// CreateNewUser("user2", "pass2", "user2@email.com");
-
-
-// CreateNewCategory("Drink");
-// CreateNewCategory("Toy");
-// CreateNewCategory("Electronic");
-
-
-// CreateNewFood("Water", 1.00, "Drink", true);
-// CreateNewFood("Pokemon Toy", 2.00, "Toy", true);
-// CreateNewFood("Gadget", 20.00, "Electronic", true);
-
-
-// GetAllFoods();
-// GetFoodById(2);
