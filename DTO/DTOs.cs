@@ -40,9 +40,9 @@ namespace Project2.DTOs
             public  string? Password {get;set;}
         }
 
-    // public class LoginResponseDTO
-    //     {
-    //         public string? UserName {get;set;}
-    //         public string? Authorization {get;set;}
-    //     }
+    public class LoginResponseDTO
+        {
+            public string? UserName {get;set;}
+            public string? Authorization {get;set;}
+        }
 }

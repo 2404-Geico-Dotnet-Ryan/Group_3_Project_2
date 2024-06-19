@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Project2.Data;
 using Project2.DTOs;
 using Project2.Models;
@@ -24,7 +26,7 @@ namespace Project2.Services
                     UserName = UserDto.UserName,
                     Password = UserDto.Password,
                     RoleId = UserDto.RoleId
-                    
+
                 };
 
                 _context.Users.Add(user);
@@ -69,7 +71,7 @@ namespace Project2.Services
                     UserId = u.UserId,
                     UserName = u.UserName,
                     Password = u.Password,
-                    RoleId= u.RoleId
+                    RoleId = u.RoleId
                 }).ToList();
 
             return users;
@@ -87,7 +89,7 @@ namespace Project2.Services
                     UserId = user.UserId,
                     UserName = user.UserName,
                     Password = user.Password,
-                    RoleId= user.RoleId
+                    RoleId = user.RoleId
                 };
 
                 return userDto;
@@ -118,25 +120,27 @@ namespace Project2.Services
             }
         }
 
-        public User LoginUser(UserLoginDTO userLogin)
+        public async Task<ActionResult<UserDTO>> LoginUser(UserDTO userLogin)
         {
-            var user = _context.Users.FirstOrDefault(u => u.UserName == userLogin.UserName && u.Password == userLogin.Password);
-            if (user == null)
+            // Find the user by username and password
+            var login = await _context.Users.FirstOrDefaultAsync(l => l.UserName == userLogin.UserName && l.Password == userLogin.Password);
+
+            if (login == null)
             {
                 return null; // Indicate failure to find the user
             }
 
             // Convert the User entity to a UserDTO
-            var userDto = ConvertUserToUserDTO(user);
+            var userDto = ConvertUserToUserDTO(login);
 
-            return user;
+            return userLogin;
         }
         private UserDTO ConvertUserToUserDTO(User user)
         {
             return new UserDTO
             {
                 UserName = user.UserName,
-                Password = user.Password, 
+                Password = user.Password,
 
             };
         }
