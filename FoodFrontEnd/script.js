@@ -82,84 +82,102 @@ function TeardownLoginContainer() {
 
 GenerateLoginContainer();
 
+//Register New User
+function GenerateNewUserContainer() {
+    let newUserHeader = document.createElement("h4");
+    newUserHeader.textContent = "Register";
 
-function GenerateAddUserContainer() {
-    let addUserHeader = document.createElement("h4");
-    addUserHeader.textContent = "Register";
+    // Create the new user container div
+    let newUserContainerDiv = document.createElement("div");
+    newUserContainerDiv.id = "new-user-container";
 
-    let addnewUserContainerDiv = document.createElement("div");
+    let newUsernameInput = document.createElement('input');
+    newUsernameInput.type = 'text';
+    newUsernameInput.id = 'new-username-input';
 
-    // Create the username input field and label
-    let usernameInput = document.createElement('input');
-    usernameInput.type = 'text';
-    usernameInput.id = 'username-input';
+    let newUsernameInputLabel = document.createElement('label');
+    newUsernameInputLabel.textContent = "Username";
 
-    let usernameInputLabel = document.createElement('label');
-    usernameInputLabel.textContent = "Username";
+    let newPasswordInput = document.createElement('input');
+    newPasswordInput.type = 'password';
+    newPasswordInput.id = 'new-password-input';
 
-    // Create the password input field and label
-    let passwordInput = document.createElement('input');
-    passwordInput.type = 'password';
-    passwordInput.id = 'password-input';
-
-    let passwordInputLabel = document.createElement('label');
-    passwordInputLabel.textContent = "Password";
+    let newPasswordInputLabel = document.createElement('label');
+    newPasswordInputLabel.textContent = "Password";
 
     let registerButton = document.createElement('button');
     registerButton.textContent = "Register";
 
-    newUserContainerDiv.appendChild(addnewUserContainerDiv);
+    userContainerDiv.appendChild(newUserContainerDiv);
 
-    addnewUserContainerDiv.appendChild(addUserHeader);
-    addnewUserContainerDiv.appendChild(usernameInputLabel);
-    addnewUserContainerDiv.appendChild(usernameInput);
-    addnewUserContainerDiv.appendChild(passwordInputLabel);
-    addnewUserContainerDiv.appendChild(passwordInput);
-    addnewUserContainerDiv.appendChild(registerButton);
+    newUserContainerDiv.appendChild(newUserHeader);
+    newUserContainerDiv.appendChild(newUsernameInputLabel);
+    newUserContainerDiv.appendChild(newUsernameInput);
+    newUserContainerDiv.appendChild(newPasswordInputLabel);
+    newUserContainerDiv.appendChild(newPasswordInput);
+    newUserContainerDiv.appendChild(registerButton);
 
-    registerButton.addEventListener("click", GetAddUserInformation);
+    registerButton.addEventListener("click", GetNewUserInformation);
 }
 
-function GetAddUserInformation() {
-    let userName = document.querySelector("#userName-input").value;
-    let password = document.querySelector("#password-input").value;
+function GetNewUserInformation() {
+    let username = document.querySelector("#new-username-input").value;
+    let password = document.querySelector("#new-password-input").value;
 
-    AddUser(userName, password);
+    NewUser(username, password);
 }
 
-async function AddUser(userName, password) {
+async function NewUser(username, password) {
     try {
-        let response = await fetch(`${BASE_URL}/User`, {
+        let response = await fetch(`${BASE_URL}/Users`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': "application/json"
             },
             body: JSON.stringify({
-                UserId: 0,
-                Username: userName,
-                Password: password
+                "userId": 0,
+                "username": username,
+                "password": password,
+                "roleId": 1
             }),
         });
         let data = await response.json();
         current_user = data;
+
         console.log(current_user);
-        GenerateUserProfileContainer(current_user);
-        return current_user;
-    } catch (Error) {
-        console.error(Error);
+        TeardownNewUserContainer();
+        TeardownLoginContainer();
+        generateHomePageContainer(data);
+        console.log(data);
+    } catch (e) {
+        console.error('Registration Error:', e); // Added error logging
     }
 }
-function TeardownCreateUserContainer() {
-    let newUserDiv = document.querySelector("#new-user-container");
 
-    if (newUserDiv != null) {
-        while (newUserDiv.firstChild) {
-            newUserDiv.firstChild.remove();
+function getNewUserInput() {
+    let username = document.querySelector("#users-username-input").value;
+    let password = document.querySelector("#users-password-input").value;
+
+
+    if (username && password) {
+        CreateNewUser(username, password);
+    } else {
+        NewUserErrorField();
+    }
+}
+function NewUserErrorField() { }
+
+function TeardownNewUserContainer() {
+    let newUserContainerDiv = document.querySelector("#new-user-container");
+
+    if (newUserContainerDiv != null) {
+        while (newUserContainerDiv.firstChild) {
+            newUserContainerDiv.firstChild.remove();
         }
     }
 }
 
-GenerateAddUserContainer();
+GenerateNewUserContainer();
 
 
 // Generate a homepage for the user
@@ -367,7 +385,7 @@ async function LoginUser(username, password) {
 
         console.log(current_user);
         TeardownLoginContainer()
-        TeardownCreateUserContainer()
+        TeardownNewUserContainer()
 
         generateHomePageContainer(data);
 
