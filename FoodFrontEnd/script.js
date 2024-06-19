@@ -16,7 +16,6 @@ const BASE_URL = "http://localhost:5152";
 
 let current_user = {};
 
-
 // This means I need functions that can be run to create entire components on the fly, and tear them down once I am done with them
 // I want to do this, so that I can keep track of the users' information on the same script.
 
@@ -26,18 +25,18 @@ This is done to free up memory and prevent memory leaks.*/
 
 // User Container Div
 const userContainerDiv = document.querySelector("#user-authorization-container");
-
+const newUserContainerDiv = document.querySelector("#new-user-container");
 // User homepage containers
 const homePageContainerDiv = document.querySelector("#home-page-container");
 const userProfileContainerDiv = document.querySelector("#user-profile-container");
 const newFoodContainerDiv = document.querySelector("#new-food-container");
 const allFoodsContainerDiv = document.querySelector("#all-foods-container");
-
-
-
+//const menuContainerDiv = document.querySelector("#menu-container");
 
 // Login Container Creation Function
 function GenerateLoginContainer() {
+    let loginHeader = document.createElement("h4");
+    loginHeader.textContent = "Login";
     // Create the main login container div
     let loginDiv = document.createElement("div");
     loginDiv.id = "login-container";
@@ -66,6 +65,7 @@ function GenerateLoginContainer() {
     userContainerDiv.appendChild(loginDiv);
 
     // Append the username and password fields and labels to the login container
+    loginDiv.appendChild(loginHeader);
     loginDiv.appendChild(usernameInputLabel);
     loginDiv.appendChild(usernameInput);
     loginDiv.appendChild(passwordInputLabel);
@@ -101,8 +101,86 @@ function TeardownLoginContainer() {
 
 // Generate and tear down a login component
 GenerateLoginContainer();
-//TeardownLoginContainer(); // Uncomment this line to tear down the login component
 
+
+function GenerateAddUserContainer() {
+    let addUserHeader = document.createElement("h4");
+    addUserHeader.textContent = "Register";
+  
+    let addnewUserContainerDiv = document.createElement("div");
+    newUserContainerDiv.id = "new-user-container";
+  
+    // Create the username input field and label
+    let usernameInput = document.createElement('input');
+    usernameInput.type = 'text';
+    usernameInput.id = 'username-input';
+
+    let usernameInputLabel = document.createElement('label');
+    usernameInputLabel.textContent = "Username";
+
+    // Create the password input field and label
+    let passwordInput = document.createElement('input');
+    passwordInput.type = 'password';
+    passwordInput.id = 'password-input';
+
+    let passwordInputLabel = document.createElement('label');
+    passwordInputLabel.textContent = "Password";
+    
+    let registerButton = document.createElement('button');
+    registerButton.textContent = "Register";
+
+    newUserContainerDiv.appendChild(addnewUserContainerDiv);
+
+    addnewUserContainerDiv.appendChild(addUserHeader);
+    addnewUserContainerDiv.appendChild(usernameInputLabel);
+    addnewUserContainerDiv.appendChild(usernameInput);
+    addnewUserContainerDiv.appendChild(passwordInputLabel);
+    addnewUserContainerDiv.appendChild(passwordInput);
+    addnewUserContainerDiv.appendChild(registerButton);
+
+    registerButton.addEventListener("click", GetAddUserInformation);
+}
+
+function GetAddUserInformation() {
+    let userName = document.querySelector("#userName-input").value;
+    let password = document.querySelector("#password-input").value;
+
+    AddUser(userName, password);
+  }
+  
+  async function AddUser(userName, password) {
+    try {
+      let response = await fetch(`${BASE_URL}/User`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          UserId: 0,
+          Username: username,
+          Password: password
+        }),
+      });
+      let data = await response.json();
+      current_user = data;
+      console.log(current_user);
+      GenerateUserProfileContainer(current_user);
+      return current_user;
+    } catch (Error) {
+      console.error(Error);
+    }
+}
+function TeardownCreateUserContainer() {
+    let newUserDiv = document.querySelector("#new-user-container");
+
+    if (newUserDiv != null) {
+        while (newUserDiv.firstChild) {
+            newUserDiv.firstChild.remove();
+        }
+    }
+}  
+
+GenerateAddUserContainer();
 
 
 // Generate a homepage for the user
@@ -115,8 +193,8 @@ function generateHomePageContainer(userData){
 
 // teardown the homepage for the user
 function tearDownHomePageContainer(){
-    while(homePageContainer.firstChild){
-        homePageContainer.firstChild.remove();
+    while(homePageContainerDiv.firstChild){
+        homePageContainerDiv.firstChild.remove();
     }
 }
 
@@ -246,19 +324,29 @@ async function generateAllFoodsContainer(){
 }
 
 
-// generate food element
+//generate food element
 function generateFoodElement(food){
     let foodElementDiv = document.createElement("div");
     foodElementDiv.id = `food-${food.foodId}`;
-    let foodIdLabel = document.createElement("h5");
-    foodIdLabel.textContent = food.foodId;
-    let foodNameLabel = document.createElement("h5");
-    foodNameLabel.textContent = food.itemName;
-    let foodPriceLabel = document.createElement("h5");
-    foodPriceLabel.textContent = food.price;
-    let foodFoodQuantityLabel = document.createElement("h5");
-    foodFoodQuantityLabel.textContent = food.foodQuantity;
-    let foodInStockLabel = document.createElement("h5");
+
+
+    let foodIdLabel0 = document.createElement("h6");
+    foodIdLabel0.textContent = "Food ID: " + food.foodId;
+
+    // let foodIdLabel = document.createElement("h6");
+    // foodIdLabel.textContent = food.foodId;
+
+    let foodNameLabel = document.createElement("h6");
+    foodNameLabel.textContent = "Item Name: " + food.itemName;
+
+    let foodPriceLabel = document.createElement("h6");
+    foodPriceLabel.textContent = "Price: $" + food.price;
+
+    let foodFoodQuantityLabel = document.createElement("h6");
+    foodFoodQuantityLabel.textContent = "Quantity: " +  food.foodQuantity;
+
+    let foodInStockLabel = document.createElement("h6");
+
     foodInStockLabel.textContent = food.inStock;
     
     //if boolean value is true, then it will display "Available" else "Unavailable"
@@ -274,7 +362,8 @@ function generateFoodElement(food){
     console.log(food);
 
 
-    foodElementDiv.appendChild(foodIdLabel);
+    foodElementDiv.appendChild(foodIdLabel0);
+    //foodElementDiv.appendChild(foodIdLabel);
     foodElementDiv.appendChild(foodNameLabel);
     foodElementDiv.appendChild(foodPriceLabel);
     foodElementDiv.appendChild(foodFoodQuantityLabel);
@@ -342,13 +431,17 @@ async function LoginUser(username, password) {
         let data = await response.json();
         current_user = data;
 
+        console.log(current_user);
         TeardownLoginContainer()
+
         generateHomePageContainer(data);
-        console.log(data);
+        
     } catch (e) {
         console.error('Error logging in:', e); // Added error logging
     }
 }
+
+
 
 async function GetAllUsers(){
     try{
@@ -376,34 +469,34 @@ async function GetUserById(id){
 // This is a critical function for registering someone in this application
 // After having made this function, and tested it out, you can now build out the inputs and buttons needed to allow someone to create a user from the website
 
-async function CreateNewUser(username, password, email){
-    try{
-        let response = await fetch(`${BASE_URL}/Users`, {
-            method: "POST",
-            headers: {
-                'Content-Type': "application/json" // Corrected the content type to 'application/json'
-            },
-            body: JSON.stringify({
-                "Username": username, 
-                "Password": password,
-                "Email": email
-            })
-        });
-        // let data = await response.json();
-        // console.log(data);
-        console.log(response);
-        if(response.ok){
-            // alert will create a pop up box that the user will see no matter waht
-            // This is not a good way of telling the user that what they did was successful or unsuccessful, it is just here as a placeholder for development purposes
-            // A preferable solution is a modal
-            alert("User is created!")
-        }else{
-            alert("User was not created")
-        }
-    }catch(error){
-        console.error(error);
-    }
-}
+// async function CreateNewUser(username, password){
+//     try{
+//         let response = await fetch(`${BASE_URL}/Users`, {
+//             method: "POST",
+//             headers: {
+//                 'Content-Type': "application/json"
+//             },
+//             body: JSON.stringify({
+//                 "Username": username, 
+//                 "Password": password,
+//             })
+//         });
+//         // let data = await response.json();
+//         // console.log(data);
+//         console.log(response);
+//         if(response.ok){
+//             // alert will create a pop up box that the user will see no matter waht
+//             // This is not a good way of telling the user that what they did was successful or unsuccessful, it is just here as a placeholder for development purposes
+//             // A preferable solution is a modal
+//             alert("User is created!")
+//         }else{
+//             alert("User was not created")
+//         }
+
+//     }catch(error){
+//         console.error(error);
+//     }
+// }
 
 // CRUD functions for these data models
 
@@ -422,12 +515,10 @@ async function CreateNewFood(itemName, price, foodQuantity, inStock){
                 foodQuantity,
                 inStock
             })
-        });
-        // let data = await response.json();
-        // console.log(data);
+
+        });                 
 
 
-                    
 
         console.log(response);
         if(response.ok){
