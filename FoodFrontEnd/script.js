@@ -121,34 +121,49 @@ function GenerateAddUserContainer() {
 }
 
 function GetAddUserInformation() {
-    let userName = document.querySelector("#userName-input").value;
+    let userName = document.querySelector("#username-input").value;
     let password = document.querySelector("#password-input").value;
 
     AddUser(userName, password);
 }
 
-async function AddUser(userName, password) {
+async function AddUser(userId, userName, password, roleId) {
     try {
-        let response = await fetch(`${BASE_URL}/User`, {
+        let response = await fetch(`${BASE_URL}/Users`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                UserId: 0,
+                UserId: userId,
                 Username: userName,
-                Password: password
+                Password: password,
+                RoleId: roleId
             }),
         });
         let data = await response.json();
         current_user = data;
         console.log(current_user);
-        GenerateUserProfileContainer(current_user);
+        generateUserProfileContainer(current_user);
         return current_user;
     } catch (Error) {
         console.error(Error);
     }
 }
+
+function getNewUserInput() {
+    let userName = document.querySelector("#users-username-input").value;
+    let password = document.querySelector("#users-password-input").value;
+
+
+    if (userName && password) {
+        CreateNewUser(userName, password);
+    } else {
+        NewUserErrorField();
+    }
+}
+function NewUserErrorField() { }
+
 function TeardownCreateUserContainer() {
     let newUserDiv = document.querySelector("#new-user-container");
 
